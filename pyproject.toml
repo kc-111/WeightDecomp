@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "BayesOptDTL"
+version = "0.1.0"
+description = "Bayesian Optimization for Design-Test-Learn Cycle"
+authors = [
+  { name = "Pak Lun Kevin Cheung", email = "pcheung4@wisc.edu" }
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "numpy",
+    "notebook",
+    "scipy==1.15.0",
+    "pandas==2.3.2",
+    "matplotlib==3.10.6",
+    "scikit-learn==1.7.1",
+    "seaborn==0.13.2",
+    "jupyterlab==4.3.3",
+    "tqdm==4.66.4",
+    "pillow==10.4.0",
+    "h5py==3.12.1",
+    "torch==2.8.0",
+    "torchvision==0.23.0",
+    "torchaudio==2.8.0",
+    "diffrax==0.7.0",
+    "flax==0.11.2",
+    "tabpfn",
+    "cma>=3.0",
+    "numba",
+    "optuna>=3.0",
+]
+
+[project.optional-dependencies]
+cpu = [
+  "jax[cpu]==0.6.2",
+]
+
+# pip install -e .[gpu-linux] --extra-index-url https://download.pytorch.org/whl/cu124
+# Linux GPU support (JAX CUDA only works on Linux)
+gpu-linux = [
+  "jax[cuda12]==0.6.2",
+  "triton==3.4.0",
+]
+
+# Windows GPU support - PyTorch CUDA
+# Install with: pip install -e .[gpu-windows] --extra-index-url https://download.pytorch.org/whl/cu124
+gpu-windows = [
+  "jax[cpu]==0.6.2",
+]
