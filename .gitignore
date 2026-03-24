@@ -1,6 +1,4 @@
 .venv
 *.egg-info
 __pycache__
-
-# Agent workspace (ephemeral communication)
-.agent_workspace/
+/data/

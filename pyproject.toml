@@ -3,9 +3,9 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "BayesOptDTL"
+name = "WeightDecomp"
 version = "0.1.0"
-description = "Bayesian Optimization for Design-Test-Learn Cycle"
+description = "Weight decomposition for deep learning models"
 authors = [
   { name = "Pak Lun Kevin Cheung", email = "pcheung4@wisc.edu" }
 ]
@@ -17,20 +17,22 @@ requires-python = ">=3.11"
 dependencies = [
     "numpy",
     "notebook",
-    "scipy==1.15.0",
-    "pandas==2.3.2",
-    "matplotlib==3.10.6",
-    "scikit-learn==1.7.1",
-    "seaborn==0.13.2",
-    "jupyterlab==4.3.3",
-    "tqdm==4.66.4",
-    "pillow==10.4.0",
-    "h5py==3.12.1",
-    "torch==2.8.0",
-    "torchvision==0.23.0",
-    "torchaudio==2.8.0",
-    "diffrax==0.7.0",
-    "flax==0.11.2",
+    "scipy",
+    "pandas",
+    "matplotlib",
+    "scikit-learn",
+    "seaborn",
+    "jupyterlab",
+    "tqdm",
+    "pillow",
+    "h5py",
+    "torch",
+    "torchvision",
+    "torchaudio",
+    "datasets",
+    "tiktoken",
+    "diffrax",
+    "flax",
     "tabpfn",
     "cma>=3.0",
     "numba",
