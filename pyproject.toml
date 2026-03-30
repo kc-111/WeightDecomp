@@ -30,6 +30,7 @@ dependencies = [
     "torchvision",
     "torchaudio",
     "datasets",
+    "safetensors",
     "tiktoken",
     "diffrax",
     "flax",
