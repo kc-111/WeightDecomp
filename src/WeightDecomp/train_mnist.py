@@ -12,25 +12,18 @@ from .mlp import DecomposedMLP
 
 
 def reset_factor_optimizer_state(optimizer: torch.optim.Optimizer, model: nn.Module):
-    """Reset optimizer state for all B and C factor parameters.
+    """Reset optimizer state for all factor parameters after merge.
 
-    After merge, C has been zeroed and B may be re-randomized, so their
-    accumulated Adam momentum/variance is stale. W's state is kept intact.
-
-    Works with any model containing DecomposedLinear or SharedBAttention
-    submodules (DecomposedMLP, DecomposedViT, etc.).
+    Delegates to model.reset_factor_optimizer_state() if available (DecomposedViT).
+    Falls back to scanning for DecomposedLinear modules (DecomposedMLP).
     """
-    factor_attrs = [
-        'Bs', 'Cs', 'As', 'A_bias',  # DecomposedLinear / ABCLinear
-        'As_q', 'As_k', 'As_v', 'Cs_q', 'Cs_k', 'Cs_v',  # attention weight
-        'Ab_q', 'Ab_k', 'Ab_v',  # attention bias
-        'shared_Bs', 'shared_bv',  # model-level shared factors
-    ]
-    for module in model.modules():
-        for attr_name in factor_attrs:
-            attr = getattr(module, attr_name, None)
-            if isinstance(attr, nn.ParameterList):
-                for param in attr.parameters():
+    if hasattr(model, 'reset_factor_optimizer_state'):
+        model.reset_factor_optimizer_state(optimizer)
+    else:
+        # Fallback for DecomposedMLP and other simple models
+        for module in model.modules():
+            if isinstance(module, DecomposedLinear):
+                for param in list(module.Bs.parameters()) + list(module.Cs.parameters()):
                     if param in optimizer.state:
                         del optimizer.state[param]
 
