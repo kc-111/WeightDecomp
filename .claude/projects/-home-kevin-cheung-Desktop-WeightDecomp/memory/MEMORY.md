@@ -1,1 +1,0 @@
-- [Centered-B discovery](centered_b_discovery.md) — Mean-centering B enables dead neuron revival in transformers with RMSNorm
